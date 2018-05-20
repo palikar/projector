@@ -1,0 +1,15 @@
+{
+
+    "cmake":{
+        "root_dir": "cmake_project",
+        "properties": [
+            {
+                "name": "project_name"
+            },
+            {
+                "name": "install_prefix",
+                "default":"/usr/local/"
+            }
+        ]
+    }
+}
