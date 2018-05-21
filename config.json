@@ -11,5 +11,29 @@
                 "default":"/usr/local/"
             }
         ]
+    },
+    "beamer":{
+        "root_dir": "beamer_presentation",
+        "properties": [
+            {
+                "name": "project_name"
+            },
+            {
+                "name": "author_name",
+                "default":"Stanislav Arnaudov"
+            },
+            {
+                "name": "title"
+            },
+            {
+                "name": "subtitle",
+                "default":" "
+            },
+            {
+                "name": "institute",
+                "default": "KIT - Karlsruher Institut Für Technologie"
+            }
+        ]
+        
     }
 }

@@ -1,0 +1,39 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:t todo:t |:t
+#+TITLE: README
+#+DATE: <2018-05-21 Mon>
+#+AUTHOR: Stanislav Arnaudov
+#+EMAIL: arnaud@localhost.localdomain
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 25.2.2 (Org mode 9.1.13)
+
+
+* Abstract
+A handy utility that (for now) helps me create my project in a simple manner, without copying and pasting a whole directory of an existing project and then going through the files and replacing the necessary files and file contents with new words. This /python/ scripts automates exactly this process. Custom project-templates can be added as easily as just adding a new project-template folder and specifying the file names that should be changed. Then trough the configuration file everything about the new project-template could setup.  
+
+* Instalation and basic usage
+Clone the repo with
+#+BEGIN_EXAMPLE
+git clone https://github.com/palikar/projector
+#+END_EXAMPLE
+You will probably have to do something like
+#+BEGIN_EXAMPLE
+cd projector
+chmod +x create_project.py
+#+END_EXAMPLE
+Then you can run the script like:
+#+BEGIN_EXAMPLE
+./create_project.py cmake ~/code/
+#+END_EXAMPLE
+This will create new /cmake/-project and will place the root directory of the project in the folder =~/code= of your system. If you don't like the structure of the setup of any of the templates, feel free to change them. The templates' folders are in the root of the repo and are specified through the =root_dir= property of each generator in the config file.
+
+* Config file
+The file that defines all the projects that can be created is =config.json=.
+** Mandatory property for each project.
+~project_name~ - this should be always there as the scripts use this to create the folder for the project.
+*** TODO Add new top level property for the folder name
