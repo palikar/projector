@@ -102,7 +102,6 @@ def main():
     replacements = reader.read()
 
     
-
     print("Final config: " + str(replacements).replace("%", ""))
 
 

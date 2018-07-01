@@ -21,7 +21,7 @@
                 "token": "lic",
                 "choice": ["GPL", "MIT"]
             }
-        ]
+        ],
     },
     "beamer":{
         "root_dir": "beamer_presentation",
