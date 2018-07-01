@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
 
-import sys, os, json
+import sys, os, json, argparse
 import shutil
 import binaryornot.check as bon
+from property_reader import PropertyReader
 
 
 def copytree(src, dst, symlinks=False, ignore=None):
@@ -50,17 +51,44 @@ def replace_in_tree(replacements, tree, file_names=False):
 
 
 
+        
+
+
 
 
 def main():
+
     config = None
-    with open(os.path.dirname(sys.argv[0])+"/config.json", "r") as config_file:
+    if not os.path.isfile(os.path.join(os.path.dirname(sys.argv[0]), "config.json")):
+        print("Configuraion file is missing")
+        exit(1)
+
+    with open(os.path.join(os.path.dirname(sys.argv[0]), "config.json"), "r") as config_file:
         config = json.load(config_file)
-        
     
 
-    generator = sys.argv[1]
+    parser = argparse.ArgumentParser(description='Generates boiler plate projects')
+    parser.add_argument('generator', type=str, default="no_gen",nargs="?",
+			help='The name of the template to be used for generating the new project')
+
+    parser.add_argument('direcotry', type=str, default="~/code",nargs="?",
+			help='The direcotry where the new project will be created')
+    parser.add_argument('--list-gen', action='store_true',
+			help='List all the available generators')
+
     
+    args = parser.parse_args()
+
+
+
+    if args.list_gen:
+        print("Available generators:")
+        for gen, gen_node in config.items():
+            print(gen)
+        exit(0)
+
+
+    generator = args.generator    
     print("Generator in use: " + generator)
     if not generator in config:
         print("There is no defined generator with this name")
@@ -69,35 +97,40 @@ def main():
 
     template_dir = (os.path.dirname(sys.argv[0]))+"/"+ config[generator]["root_dir"]
     replacements = {}
-    for prop in  config[generator]["properties"]:
-        while True:
-            if "default" in prop:
-                value = input(prop["name"]+"("+prop["default"]+"): ")
-                if value.strip() == "":
-                    value = prop["default"]
-            else:
-                value = input(prop["name"]+": ")
-                if value.strip() == "":
-                    continue
-            replacements["%" + prop["name"] + "%"] = value
-            break
+    reader = PropertyReader()
+    reader.load_properties(config[generator]["properties"])
+    replacements = reader.read()
+
+    
+
     print("Final config: " + str(replacements).replace("%", ""))
 
 
     
-    location = sys.argv[2]
+
+    location = os.path.expanduser(args.direcotry)
+    
     proj_dir = os.path.join(location, replacements["%project_name%"])
     if not os.path.isdir(proj_dir):
         os.makedirs(proj_dir)
-    copytree(template_dir, proj_dir)
-
-    replace_in_tree(replacements, proj_dir, file_names=True)
 
 
+    
+    # copytree(template_dir, proj_dir)
 
 
-
+    
+    # replace_in_tree(replacements, proj_dir, file_names=True)
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+
+        
+        
+
     

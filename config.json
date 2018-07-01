@@ -1,14 +1,25 @@
 {
-
     "cmake":{
         "root_dir": "cmake_project",
         "properties": [
             {
-                "name": "project_name"
+                "name": "Name of the project",
+                "token": "project_name"
             },
             {
-                "name": "install_prefix",
+                "name": "Installation prefix for 'make install' ",
+                "token": "install_prefix",
                 "default":"/usr/local/"
+            },
+            {
+                "name": "Init git",
+                "token" : "git",
+                "y_n": true
+            },
+            {
+                "name": "Licens",
+                "token": "lic",
+                "choice": ["GPL", "MIT"]
             }
         ]
     },
@@ -16,24 +27,28 @@
         "root_dir": "beamer_presentation",
         "properties": [
             {
-                "name": "project_name"
+                "name": "Name of the project",
+                "token": "project_name"
             },
             {
-                "name": "author_name",
-                "default":"Stanislav Arnaudov"
+                "name": "Author of the project",
+                "default":"Stanislav Arnaudov",
+                "token": "author_name"
             },
             {
-                "name": "title"
+                "name": "Title",
+                "token": "title"
             },
             {
-                "name": "subtitle",
+                "name": "Subtitle",
+                "token": "subtitle",
                 "default":" "
             },
             {
-                "name": "institute",
+                "name": "Institute or Organisation",
+                "token": "institute",
                 "default": "KIT - Karlsruher Institut Für Technologie"
             }
         ]
-        
     }
 }

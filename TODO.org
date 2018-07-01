@@ -1,0 +1,10 @@
+* For the choices - selection possible with list of numbers
+"
+License:
+(1)GPL, (2)MIT...
+:1
+"
+
+* Configurable default directory
+
+
