@@ -1,58 +1,20 @@
 #!/usr/bin/python
 
 
-import sys, os, json, argparse
-import shutil
-import binaryornot.check as bon
+import sys
+import os
+import json
+import argparse
 
 from .property_reader import PropertyReader
 from .generator import Generator
+from .renderer import Renderer
 
-
-def copytree(src, dst, symlinks=False, ignore=None):
-    for item in os.listdir(src):
-        s = os.path.join(src, item)
-        d = os.path.join(dst, item)
-
-
-        if os.path.isdir(s):
-            shutil.copytree(s, d, symlinks, ignore)
-        else:
-            shutil.copy2(s, d)
-
-            
-def replace_in_file(input_file_name, replacements, output_file_name):
-
-    with open(input_file_name, "r") as input_template, open(output_file_name, "w") as final:
-         for line in input_template:
-            for src, target in replacements.items():
-                line = line.replace(src, str(target))
-            final.write(line)
-
-            
-
-def replace_in_tree(replacements, tree, file_names=False):
-    for f in os.listdir(tree):
-        f = os.path.join(tree, f)
-        if file_names:
-            for key, val in replacements.items():
-                if key in str(f):
-                    os.rename(f, str(f).replace(key,val))
-                    f = str(f).replace(key,val)
-                    break            
-
-        if os.path.isfile(f) and not bon.is_binary(f) :
-            temp = os.path.join(tree, "temp")
-            replace_in_file(f, replacements, temp)
-            os.remove(f)
-            os.rename(temp, f)
-        elif os.path.isdir(f):
-            replace_in_tree(replacements, f, file_names=file_names)
 
             
 
 
-def get_parser(args):
+def get_parser():
     parser = argparse.ArgumentParser(description='Generates boiler plate projects')
     parser.add_argument('generator', type=str, default="no_gen",nargs="?",
 			help='The name of the template to be used for generating the new project')
@@ -64,16 +26,12 @@ def get_parser(args):
 
     return parser
 
-    
 
-
-
-
-        
 def main():
 
     config = None
-    config_file = os.path.join(os.path.dirname(os.path.join(__file__, '..', 'data')), "config.json")
+    data_dir = os.path.join(os.path.dirname(__file__), "data")
+    config_file = os.path.join(os.path.dirname(__file__), "data", "config.json")
     if not os.path.isfile(config_file):
         print("Configuraion file is missing")
         exit(1)
@@ -101,35 +59,9 @@ def main():
 
 
     reader = PropertyReader()
-    
-    gen = Generator(config[Generator], reader, renderer)
-
-
-    template_dir = (os.path.dirname(sys.argv[0]))+"/"+ config[generator]["root_dir"]
-    replacements = {}
-    
-    reader.load_properties(config[generator]["properties"])
-    replacements = reader.read()
-
-    
-    print("Final config: " + str(replacements).replace("%", ""))
-
-
-    
-
-    location = os.path.expanduser(args.direcotry)
-    
-    proj_dir = os.path.join(location, replacements["%project_name%"])
-    if not os.path.isdir(proj_dir):
-        os.makedirs(proj_dir)
-
-
-    
-    copytree(template_dir, proj_dir)
-
-
-    
-    replace_in_tree(replacements, proj_dir, file_names=True)
+    renderer = Renderer()
+    gen = Generator(config[generator], reader, renderer, data_dir = data_dir)
+    gen(args.direcotry)
 
 if __name__ == '__main__':
     main()

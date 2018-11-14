@@ -15,7 +15,7 @@ exec(open('projector/version.py').read())
 setup(
     name="Projector",
     version=__version__,
-    package_data={'projector': ['data/*']},
+    package_data={'projector': ['data/**/*']},
     include_package_data=True,
     author="Stanislav Arnaudov",
     author_email="stanislav_ts@abv.bg",
@@ -29,7 +29,9 @@ setup(
     setup_requires=["pytest-runner", "pystache"],
     tests_require=["pytest"],
     entry_points={
-        'console_scripts': []
+        'console_scripts': [
+            'projector = projector.create_project:main'
+        ]
     },
     classifiers=[
         "Development Status :: 3 - Alpha",

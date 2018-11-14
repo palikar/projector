@@ -80,7 +80,7 @@ class PropertyReader:
         repl = {}
         for prop in  self.props:
             value = self._process_prop(prop)
-            repl["%"+prop["token"]+"%"] = value
+            repl[prop["token"]] = value
         return repl
 
 
