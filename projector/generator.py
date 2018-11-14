@@ -17,7 +17,9 @@ class Generator:
     def __call__(self, path):
         
         template_dir = os.path.join(self.data_dir, self.config["root_dir"])
+        template_dir = os.path.abspath(template_dir)
 
+        
         properties = {}
         self.reader.load_properties(self.config["properties"])
         properties = self.reader.read()
@@ -27,6 +29,7 @@ class Generator:
 
 
         proj_dir = os.path.join(path, properties["project_name"])
+        proj_dir = os.path.abspath(proj_dir)
 
         if not os.path.isdir(proj_dir):
             os.makedirs(proj_dir)

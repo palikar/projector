@@ -1,3 +1,4 @@
+{{=<% %>=}}
 %% LaTeX-Beamer template for KIT design
 %% Widescreen
 %% by Erik Burger, Christian Hammer, David Dauer
@@ -31,16 +32,15 @@
 %elements on title page
 
 %KIT logo
-\begin{textblock*}{24mm}(6mm,5mm)
+
+%institute logo
+\begin{textblock*}{20mm}(104mm,4mm)
+
 \iflanguage{english}{%
 \includegraphics[width=23mm]{logos/kitlogo_en_rgb} 
 }{%
 \includegraphics[width=23mm]{logos/kitlogo_de_rgb} 
 }%
-\end{textblock*}
-
-%institute logo
-\begin{textblock*}{20mm}(104mm,4mm)
 \includegraphics[width=20mm]{logos/\@titlelogo} 
 \end{textblock*}
 
