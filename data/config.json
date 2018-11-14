@@ -1,3 +1,4 @@
+
 {
     "cmake":{
         "root_dir": "cmake_project",
@@ -21,8 +22,21 @@
                 "token": "lic",
                 "choice": ["GPL", "MIT"]
             }
-        ],
+        ]
     },
+    
+    "cmake-simple":{
+        
+    },
+    
+    "python":{
+        
+    },
+    
+    "js":{
+        
+    },
+    
     "beamer":{
         "root_dir": "beamer_presentation",
         "properties": [
@@ -51,4 +65,5 @@
             }
         ]
     }
+    
 }
