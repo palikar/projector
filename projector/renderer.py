@@ -15,8 +15,6 @@ class Renderer:
             
 
     def _process_file(self, tree, f, properties):
-
-        print(f)
         new_content = self.mustacher.render_path(f, properties)
         with open(f, 'w') as file:
             file.write(new_content)
@@ -34,7 +32,9 @@ class Renderer:
                     new_name = re.sub(r'\{\{(.*)\}\}', properties[mat.group(1)], f)
                     os.rename(f, new_name)
                     f = new_name
-                    
+
+            if os.path.isfile(f):
+                print(f)
             if os.path.isfile(f) and not utils.is_binary(f):
                 self._process_file(tree, f, properties)
             elif os.path.isdir(f):

@@ -24,10 +24,6 @@ class Generator:
         self.reader.load_properties(self.config["properties"])
         properties = self.reader.read()
 
-    
-        print("Final config: " + str(properties))
-
-
         proj_dir = os.path.join(path, properties["project_name"])
         proj_dir = os.path.abspath(proj_dir)
 
@@ -36,7 +32,7 @@ class Generator:
         else:
             print("The direcotry already exists")
 
-        print(f"Copying form {template_dir} to {proj_dir}")
+        print(f"Copying form to {proj_dir}")
         utils.copytree(template_dir, proj_dir)
 
 
