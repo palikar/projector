@@ -24,19 +24,28 @@ class Generator:
         self.reader.load_properties(self.config["properties"])
         properties = self.reader.read()
 
-        proj_dir = os.path.join(path, properties["project_name"])
-        proj_dir = os.path.abspath(proj_dir)
+        if os.path.isdir(template_dir):
 
-        if not os.path.isdir(proj_dir):
-            os.makedirs(proj_dir)
-        else:
-            print("The direcotry already exists")
+            proj_dir = os.path.join(path, properties["project_name"])
+            proj_dir = os.path.abspath(proj_dir)
 
-        print(f"Copying form to {proj_dir}")
-        utils.copytree(template_dir, proj_dir)
+            print(f"Copying from to {proj_dir}")
+            
+            if not os.path.isdir(proj_dir):
+                os.makedirs(proj_dir)
+            else:
+                print("The direcotry already exists")
+                
+            utils.copytree(template_dir, proj_dir)
+            self.rendrer.process_tree(properties, proj_dir, file_names=True)
+        elif os.path.isfile(template_dir):
+            utils.copyfile(template_dir, path+'/')
+            self.rendrer.process_file(properties,
+                                      os.path.join(path, os.path.basename(template_dir)),
+                                      file_names=True)
+        
 
 
-        self.rendrer.process_tree(properties, proj_dir, file_names=True)
 
 
         

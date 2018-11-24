@@ -19,7 +19,7 @@ def get_parser():
     parser.add_argument('generator', type=str, default="no_gen",nargs="?",
 			help='The name of the template to be used for generating the new project')
 
-    parser.add_argument('direcotry', type=str, default="~/code",nargs="?",
+    parser.add_argument('direcotry', type=str, default="~/code/",nargs="?",
 			help='The direcotry where the new project will be created')
     parser.add_argument('--list-gen', action='store_true',
 			help='List all the available generators')

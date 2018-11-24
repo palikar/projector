@@ -12,6 +12,11 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
+
+            
+def copyfile(src, dst, symlinks=False, ignore=None):
+    shutil.copy2(src, dst)
+
 def is_binary(f):
     return binary_check.is_binary(f)
     

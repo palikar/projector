@@ -186,6 +186,17 @@
                 "default": "KIT - Karlsruher Institut Für Technologie"
             }
         ]
+    },
+
+    "install_script":{
+        "root_dir": "{{project_name}}_install_script.sh",
+        "properties": [
+            {
+                "name": "Name of the package",
+                "token": "project_name"
+            }
+        ]
     }
+    
     
 }
