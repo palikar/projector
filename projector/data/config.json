@@ -192,7 +192,17 @@
         "root_dir": "{{project_name}}_install_script.sh",
         "properties": [
             {
-                "name": "Name of the package",
+                "name": "Name of the script",
+                "token": "project_name"
+            }
+        ]
+    },
+	
+    "ml_stream":{
+        "root_dir": "ml_streamer",
+        "properties": [
+            {
+                "name": "Name of the model",
                 "token": "project_name"
             }
         ]
