@@ -1,60 +1,47 @@
 import re
 import os
 import pystache
-import readline
 
-from  . import utils
-
-
-readline.parse_and_bind('tab: complete')
-readline.parse_and_bind('set editing-mode emacs')
+from . import utils
 
 
 class Renderer:
 
     def __init__(self):
         self.mustacher = pystache.Renderer()
-        
-            
 
-    def _process_file(self, tree, f, properties):
-        new_content = self.mustacher.render_path(f, properties)
-        with open(f, 'w') as file:
-            file.write(new_content)
-
+    def _process_file(self, tree, file, properties):
+        new_content = self.mustacher.render_path(file, properties)
+        with open(file, 'w') as file_hd:
+            file_hd.write(new_content)
 
     def process_tree(self, properties, tree, file_names=True):
-        for f in os.listdir(tree):
-            f = os.path.join(tree, f)
+        for file in os.listdir(tree):
+            file = os.path.join(tree, file)
 
             if file_names:
-                mat = re.search(r'\{\{(.*)\}\}', f)
+                mat = re.search(r'\{\{(.*)\}\}', file)
                 if mat and mat.group(1) in properties.keys():
-                    new_name = re.sub(r'\{\{(.*)\}\}', properties[mat.group(1)], f)
-                    os.rename(f, new_name)
-                    f = new_name
+                    new_name = re.sub(r'\{\{(.*)\}\}',
+                                      properties[mat.group(1)], file)
+                    os.rename(file, new_name)
+                    file = new_name
 
-            if os.path.isfile(f):
-                print(f)
-            if os.path.isfile(f) and not utils.is_binary(f):
-                self._process_file(tree, f, properties)
-            elif os.path.isdir(f):
-                self.process_tree(properties, f, file_names=file_names)
+            if os.path.isfile(file):
+                print(file)
+            if os.path.isfile(file) and not utils.is_binary(file):
+                self._process_file(tree, file, properties)
+            elif os.path.isdir(file):
+                self.process_tree(properties, file, file_names=file_names)
 
-        
     def process_file(self, properties, file, file_names=True):
         if file_names:
             mat = re.search(r'\{\{(.*)\}\}', file)
             if mat and mat.group(1) in properties.keys():
-                new_name = re.sub(r'\{\{(.*)\}\}', properties[mat.group(1)], file)
+                new_name = re.sub(r'\{\{(.*)\}\}',
+                                  properties[mat.group(1)], file)
                 os.rename(file, new_name)
                 file = new_name
-                
+
         if os.path.isfile(file) and not utils.is_binary(file):
             self._process_file(file, file, properties)
-            
-
-
-            
-        
-        

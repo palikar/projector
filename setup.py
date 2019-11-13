@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 import os
 import sys
-import setuptools
-import glob
+
 from distutils.core import setup
+import setuptools
+
+from projector.version import __version__
+
+
 
 
 if sys.version_info < (3, 3):
@@ -11,24 +15,22 @@ if sys.version_info < (3, 3):
     USING PYTHON {0}".format(sys.version))
     sys.exit(1)
 
-    
-
-exec(open('projector/version.py').read())
 
 def package_files(directory):
     paths = []
-    for (path, directories, filenames) in os.walk(directory):
+    for (path, _, filenames) in os.walk(directory):
         for filename in filenames:
             paths.append(os.path.join('..', path, filename))
     return paths
 
-extra_files = package_files('./projector/data/')
+
+EXTRA_FILES = package_files('./projector/data/')
 
 setup(
     name="Projector",
     version=__version__,
     # package_data={'projector': data_files},
-    package_data={'': extra_files},
+    package_data={'': EXTRA_FILES},
     include_package_data=True,
     author="Stanislav Arnaudov",
     author_email="stanislav_ts@abv.bg",

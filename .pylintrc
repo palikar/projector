@@ -1,0 +1,14 @@
+[BASIC]
+good-names=i,j,k,n,x,y,ex,_
+bad-names=foo,baz,obj
+
+[DESIGN]
+max-args=10
+max-branches=20
+
+[FORMAT]
+max-line-length = 120
+disable=locally-disabled,locally-enabled,missing-docstring,duplicate-code,fixme,cyclic-import,redefined-variable-type,stop-iteration-return, R1705, E1136, W0613, R0902
+
+[TYPECHECK]
+

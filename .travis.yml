@@ -1,0 +1,22 @@
+dist: xenial
+language: python
+
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+
+sudo: false
+
+
+install:
+  - pip3 install mock
+  - pip3 install -e .
+  - pip3 install -r requirements.txt
+
+script:
+  - make test
+  - python -m unittest discover --verbose
+
+after_success:
+  - coveralls
