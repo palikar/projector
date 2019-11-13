@@ -12,7 +12,7 @@ class Generator:
 
     def get_template_dir(self):
         template_dir = os.path.join(self.data_dir, self.config["root_dir"])
-        return  os.path.abspath(template_dir)
+        return os.path.abspath(template_dir)
 
     def gen(self, path):
         template_dir = self.get_template_dir()

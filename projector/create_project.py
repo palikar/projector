@@ -2,6 +2,7 @@
 import os
 import json
 import argparse
+import sys
 
 from .property_reader import PropertyReader
 from .generator import Generator
@@ -43,11 +44,11 @@ def main():
 
         if not os.path.isdir(args.config_dir):
             print('{} is not a directory!'.format(args.config_dir))
-            exit(1)
+            sys.exit(1)
 
         if not os.path.isfile(os.path.join(args.config_dir, 'config.json')):
             print('There is no \'config.json\' in {}!'.format(args.config_dir))
-            exit(1)
+            sys.exit(1)
 
         data_dir = os.path.abspath(args.config_dir)
         config_file = os.path.join(args.config_dir, 'config.json')
@@ -61,12 +62,12 @@ def main():
         if not os.path.isdir(data_dir):
             print("Configuraion direcotry is missing.\
  {} is not a file!".format(data_dir))
-            exit(1)
+            sys.exit(1)
 
         if not os.path.isfile(config_file):
             print("Configuraion file is missing.\
  {} is not a file!".format(config_file))
-            exit(1)
+            sys.exit(1)
 
     with open(config_file, 'r') as config_file_fd:
         config = json.load(config_file_fd)
@@ -75,12 +76,12 @@ def main():
         print("Available generators:")
         for gen, _ in config.items():
             print(gen)
-        exit(0)
+        sys.exit(0)
 
     generator = args.generator
     if generator not in config.keys():
         print("There is no defined generator with this name")
-        exit(1)
+        sys.exit(1)
     print("Generator in use: " + generator)
 
     reader = PropertyReader()

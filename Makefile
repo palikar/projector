@@ -37,13 +37,13 @@ help:
 	@echo 'make test:         Test everything'
 	@echo 'make snapshot:     Create a tar.gz of the current git revision'
 
-test: test_pylint test_flake8 test_pytest
+test: test_pylint test_flake8
 	@echo "All test ran..."
 
 test_pylint:
 	@echo "Running pylint..."
 	echo $(TEST_PATHS)
-	$(PYTHON) -m pylint $(TEST_PATHS)
+	pylint $(TEST_PATHS)
 
 test_flake8:
 	@echo "Running flake8..."

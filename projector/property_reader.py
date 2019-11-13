@@ -1,3 +1,4 @@
+import sys
 import readline
 
 
@@ -10,7 +11,6 @@ class PropertyReader:
     def __init__(self):
         self.props = []
 
-
     @staticmethod
     def _check_property(prop):
         binary = "y_n" in prop and prop["y_n"]
@@ -18,7 +18,7 @@ class PropertyReader:
 
         if binary and choices is not None:
             print("Inconsisten property: " + prop["name"])
-            exit(1)
+            sys.exit(1)
 
     @staticmethod
     def _process_prop(prop):
@@ -75,7 +75,7 @@ class PropertyReader:
             if "name" not in prop.keys() or "token" not in prop.keys():
                 print(prop)
                 print("Invalid property. Name or token missing ")
-                exit(1)
+                sys.exit(1)
             PropertyReader._check_property(prop)
 
         self.props = props

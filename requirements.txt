@@ -1,2 +1,4 @@
 binaryornot
 pystache
+flake8
+pylint
