@@ -13,31 +13,46 @@
 #+CREATOR: Emacs 25.2.2 (Org mode 9.1.13)
 
 
-
-* Abstract
+* Projector
+** Abstract
 [[./demo_pic.png]] 
-A handy utility that (for now) helps me create my project in a simple manner, without copying and pasting a whole directory of an existing project and then going through the files and replacing the necessary files and file contents with new words. This /python/ scripts automates exactly this process. Custom project-templates can be added as easily as just adding a new project-template folder and specifying the file names that should be changed. Then trough the configuration file everything about the new project-template could setup.  
+A handy utility that (for now) helps me easily create my project, without copying and pasting a whole directory of an existing project and then going through the files and replacing the necessary files and file contents with new words. This /python/ scripts automates exactly this process. Custom project-templates can be added as easily as just adding a new project-template folder and specifying the file names that should be changed. Then trough the configuration file everything about the new project-template could setup.
 
-* Instalation and basic usage
-Clone the repo with
-#+BEGIN_EXAMPLE
+
+** Instalation and basic usage
+Clone the repository and install it through the supplied ~setup.py~ file
+#+BEGIN_SRC sh
 git clone https://github.com/palikar/projector
-#+END_EXAMPLE
-You will probably have to do something like
-#+BEGIN_EXAMPLE
-cd projector
-chmod +x create_project.py
-#+END_EXAMPLE
-Then you can run the script like:
-#+BEGIN_EXAMPLE
-./create_project.py cmake ~/code/
-#+END_EXAMPLE
-This will create new /cmake/-project and will place the root directory of the project in the folder =~/code= of your system. If you don't like the structure of the setup of any of the templates, feel free to change them. The templates' folders are in the root of the repo and are specified through the =root_dir= property of each generator in the config file.
+python setup.py install
+#+END_SRC
+
 \\
+
+After that you should run able to run something like:
+#+BEGIN_SRC sh
+projector cmake-simple ~/code/new_project
+#+END_SRC
+
+This will create new /cmake/-project and will place the root directory of the project in the folder =~/code= of your system. If you don't like the structure of the setup of any of the templates, feel free to change them. The templates' folders are in the root of the repo and are specified through the =root_dir= property of each generator in the config file.
+
+\\
+
 In any file of the project-template you can use text like ~%property_name%~. The script will go through all the files, find these fields and replace them with the inputs collected on running the script. This also works for file names. The contents of binary files will be skipped but their names can be changed. In the configuration file for each generator a set of such properties is specified. Those tell the script what to expect from the user and which fields to replace in the template upon copying it in the given directory. More on the configuration file in the next section.
 
-* Config file
-The file that defines all the projects that can be created is =config.json=. Each top level object name of the json is the name of a new /generator/. The script is invoked by passing such generator as its first argument. ~root_dir~ of a given generator tells the script which is the project-templates folder. This folder will be copied in the given location and traversed and being checked for replacing the specified properties. The ~properties~ field of a generator is an array of property objects. Each object specifies:
+\\
+
+You can also list the available generators by calling:
+#+BEGIN_SRC sh
+projector --list-gen
+#+END_SRC
+
+
+** Config file
+
+~config.json~ is the file that defines all the projects that can be created. Each top-level object name of the JSON is the name of a new /generator/. The /projector/ executable has to be invoked by passing one of these generators as its first argument. ~root_dir~ of a given generator tells the script which is the project-template folder. This folder will be copied in the given location and then traversed to expand the specified properties. The ~properties~ field of a generator is an array of property objects. Each object specifies:
+
 - ~name~ - The text with which the user will be prompted to enter a value for the given property.
-- ~token~ - The text that will be replaced with the collected value. This happens in the copied template directory. In this step  the directory becomes form a template to the actual generated project. The text here must be given _without_ the percent signs. So, ="token": "author"= means that all of =%author%= in the project template will be replaced with the user's value.
-- ~default~ - Optional field. Tells the script what is the default value for this property and if the user provides empty input, this value will be used in the replacing step.
+- ~token~ - The text that will be replaced with the collected value. This happens in the copied template directory. The tokens inside the cipied template folder are expanded to the user supplied values.
+- ~default~ - Optional field. Tells the script what is the default value for this property and if the user provides empty input, this value will be used in the token-expansion step.
+
+projector uses [[https://mustache.github.io/][mustache]] (or a python [[https://github.com/defunkt/pystache][port]] of mustache) for the definition of its templates. This means that every file is processed as mustache template and ~{{token_name}}~ is replaced with the value given by the user while invoking projector.
