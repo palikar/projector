@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 
 
@@ -42,11 +41,11 @@ def main():
     if args.config_dir is not None:
 
         if not os.path.isdir(args.config_dir):
-            print(f'{args.config_dir} is not a directory!')
+            print('{} is not a directory!'.format(args.config_dir))
             exit(1)
 
         if not os.path.isfile(os.path.join(args.config_dir, 'config.json')):
-            print(f'There is no \'config.json\' in {args.config_dir}!')
+            print('There is no \'config.json\' in {}!'.format(args.config_dir))
             exit(1)
         
         data_dir = os.path.abspath(args.config_dir )
@@ -59,11 +58,11 @@ def main():
         config_file = os.path.join(data_dir, "config.json")
 
         if not os.path.isdir(data_dir):
-            print(f"Configuraion direcotry is missing. {data_dir} is not a file!")
+            print("Configuraion direcotry is missing. {} is not a file!".format(data_dir))
             exit(1)
 
         if not os.path.isfile(config_file):
-            print(f"Configuraion file is missing. {config_file} is not a file!")
+            print("Configuraion file is missing. {} is not a file!".format(config_file))
             exit(1)
 
 
@@ -94,13 +93,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-        
-        
-
-    

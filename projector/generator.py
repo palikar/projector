@@ -29,7 +29,7 @@ class Generator:
             proj_dir = os.path.join(path, properties["project_name"])
             proj_dir = os.path.abspath(proj_dir)
 
-            print(f"Copying from to {proj_dir}")
+            print("Copying from to {}".format(proj_dir))
             
             if not os.path.isdir(proj_dir):
                 os.makedirs(proj_dir)
