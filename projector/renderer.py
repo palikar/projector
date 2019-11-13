@@ -1,13 +1,16 @@
 import re
 import os
 import pystache
+import readline
 
 from  . import utils
 
 
+readline.parse_and_bind('tab: complete')
+readline.parse_and_bind('set editing-mode emacs')
+
+
 class Renderer:
-
-
 
     def __init__(self):
         self.mustacher = pystache.Renderer()

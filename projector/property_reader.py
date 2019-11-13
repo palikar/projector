@@ -5,6 +5,7 @@ class PropertyReader:
     def __init__(self):
         pass
 
+
     def _check_property(self, prop):
         default = prop["default"] if "default" in prop else None
         binary = "y_n" in prop and prop["y_n"]
@@ -62,7 +63,6 @@ class PropertyReader:
                     if value.strip() == "":
                         continue
         return value
-
 
 
     def load_properties(self, props):

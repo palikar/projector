@@ -34,7 +34,7 @@ class Generator:
             if not os.path.isdir(proj_dir):
                 os.makedirs(proj_dir)
             else:
-                print("The direcotry already exists")
+                print("The directory already exists")
                 
             utils.copytree(template_dir, proj_dir)
             self.rendrer.process_tree(properties, proj_dir, file_names=True)
