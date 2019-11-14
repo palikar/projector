@@ -6,4 +6,5 @@ then
 	echo 'Creating config dir ($HOME/.config/projector)'
 	mkdir -p $HOME/.config/projector
 fi
+rm -rf $HOME/.config/projector
 cp -r ${DIR}/data/* $HOME/.config/projector
