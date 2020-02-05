@@ -1,23 +1,10 @@
-- [Projector](#org1db3b8f)
-  - [Abstract](#orgceef8d7)
-  - [Instalation and basic usage](#orga30d47f)
-  - [Config file](#org01102ef)
-
-
-
-<a id="org1db3b8f"></a>
-
 # Projector
 
-
-<a id="orgceef8d7"></a>
 
 ## Abstract
 
 ![img](./demo_pic.png) A handy utility that (for now) helps me easily create my project, without copying and pasting a whole directory of an existing project and then going through the files and replacing the necessary files and file contents with new words. This *python* scripts automates exactly this process. Custom project-templates can be added as easily as just adding a new project-template folder and specifying the file names that should be changed. Then trough the configuration file everything about the new project-template could setup.
 
-
-<a id="orga30d47f"></a>
 
 ## Instalation and basic usage
 
@@ -50,8 +37,6 @@ You can also list the available generators by calling:
 projector --list-gen
 ```
 
-
-<a id="org01102ef"></a>
 
 ## Config file
 

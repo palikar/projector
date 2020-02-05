@@ -2,7 +2,7 @@
 #+OPTIONS: author:t broken-links:nil c:nil creator:nil
 #+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
 #+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
-#+OPTIONS: timestamp:t title:t toc:t todo:t |:t
+#+OPTIONS: timestamp:t title:t toc:nil todo:t |:t
 #+TITLE: README
 #+DATE: <2018-05-21 Mon>
 #+AUTHOR: Stanislav Arnaudov
@@ -14,8 +14,9 @@
 
 
 * Projector
-** Abstract
 [[./demo_pic.png]] 
+
+** Abstract
 A handy utility that (for now) helps me easily create my project, without copying and pasting a whole directory of an existing project and then going through the files and replacing the necessary files and file contents with new words. This /python/ scripts automates exactly this process. Custom project-templates can be added as easily as just adding a new project-template folder and specifying the file names that should be changed. Then trough the configuration file everything about the new project-template could setup.
 
 

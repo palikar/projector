@@ -1,6 +1,7 @@
 {
     "cmake-project":{
 	"root_dir": "cmake_project",
+        "description" :"Basic boomer project",
 	"properties": [
 	    {
 		"name": "Name of the project",
@@ -27,6 +28,7 @@
     "cmake-simple":{
 
 	"root_dir": "cmake_simple",
+        "description" :"",
 	"properties": [
 	    {
 		"name": "Name of the project",
@@ -49,6 +51,7 @@
 
     "python":{
 	"root_dir": "python",
+        "description" :"",
 	"properties": [
 	    {
 		"name": "Name of the project",
@@ -113,6 +116,7 @@
 
     "emacs":{
 	"root_dir": "emacs",
+        "description" :"",
 	"properties": [
 	    {
 		"name": "Name of the project",
@@ -147,6 +151,7 @@
 
     "beamer":{
 	"root_dir": "beamer_presentation",
+        "description" :"",
 	"properties": [
 	    {
 		"name": "Name of the project",
@@ -176,6 +181,7 @@
 
     "install_script":{
 	"root_dir": "{{project_name}}_install_script.sh",
+        "description" :"",
 	"properties": [
 	    {
 		"name": "Name of the script",
@@ -186,6 +192,7 @@
 
     "ml_stream":{
 	"root_dir": "ml_streamer",
+        "description" :"",
 	"properties": [
 	    {
 		"name": "Name of the model",
@@ -196,6 +203,7 @@
 
     "ml_torch" : {
         "root_dir": "ml_torch",
+        "description" :"",
         "properties": [
 	    {
 		"name": "Name of the model",

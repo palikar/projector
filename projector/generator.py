@@ -1,5 +1,5 @@
 import os
-from . import utils
+from projector import utils
 
 
 class Generator:
