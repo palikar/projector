@@ -1,7 +1,7 @@
 {
     "cmake-project":{
 	"root_dir": "cmake_project",
-        "description" :"Basic boomer project",
+        "description" :"A big C++ project based on the Cmake build system",
 	"properties": [
 	    {
 		"name": "Name of the project",
@@ -19,8 +19,8 @@
 	    },
 	    {
 		"name": "Licens",
-		"token": "lic",
-		"choice": ["GPL", "MIT"]
+		"token": "license",
+		"choice": ["GPL2", "GPL3", "MIT", "BSD2", "BSD2", "APACHE2"]
 	    }
 	]
     },

@@ -20,8 +20,7 @@ class PropertyReader:
             print("Inconsisten property: " + prop["name"])
             sys.exit(1)
 
-
-    def _process_binary(default):
+    def _process_binary(prop, default):
         value = None
         while value is None:
             if default in ("n", "y"):
@@ -30,12 +29,12 @@ class PropertyReader:
                     value = default
             else:
                 value = input(prop["name"] + "[y/n]:")
-            if value.lower() not in ("y", "n", "yes", "no" ):
+            if value.lower() not in ("y", "n", "yes", "no"):
                 value = None
                 print("Please type \'y\' or \'n\' ")
         return value == "y" or value == "yes"
 
-    def _process_choices(defaul, choices):
+    def _process_choices(prop, default, choices):
         value = None
         while value is None:
             if default in choices:
@@ -46,13 +45,13 @@ class PropertyReader:
                 if value.stip() == "":
                     value = default
             else:
-                value = input(prop["name"]+"\n"+str(choices)+"\n:")
+                value = input(prop["name"]+str(choices)+":")
                 if value not in choices:
                     value = None
                     print("The value must be in the set of choices")
         return value
-            
-    def _process_text(default):
+
+    def _process_text(prop, default):
         value = None
         while value is None:
             if default is not None:
@@ -75,12 +74,12 @@ class PropertyReader:
 
         value = None
         if binary:
-            return PropertyReader._process_binary(default)
+            return PropertyReader._process_binary(prop, default)
         elif choices is not None:
-            return PropertyReader._process_choices(default, choices)
+            return PropertyReader._process_choices(prop, default, choices)
         else:
-            return PropertyReader._process_text(default)
-            
+            return PropertyReader._process_text(prop, default)
+
         return value
 
     def load_properties(self, props):

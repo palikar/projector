@@ -5,9 +5,9 @@ import argparse
 import sys
 import termtables
 
-from projector.property_reader import PropertyReader
-from projector.generator import Generator
-from projector.renderer import Renderer
+from property_reader import PropertyReader
+from generator import Generator
+from renderer import Renderer
 
 def list_projects(config):
     print("Available generators:")
@@ -100,7 +100,8 @@ def main():
     reader = PropertyReader()
     renderer = Renderer()
     gen = Generator(config[generator], reader, renderer, data_dir=data_dir)
-    gen.gen(args.direcotry)
+    gen.generate(args.direcotry)
+
 
 
 if __name__ == '__main__':
