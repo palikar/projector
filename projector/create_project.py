@@ -24,7 +24,7 @@ def list_projects(config):
         padding=(0, 1),
         alignment="lcc")
     print(string)
-    exit(0)
+    sys.exit(0)
 
 
 def get_parser():
