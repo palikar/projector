@@ -5,25 +5,27 @@ import argparse
 import sys
 import termtables
 
-from property_reader import PropertyReader
-from generator import Generator
-from renderer import Renderer
+from .property_reader import PropertyReader
+from .generator import Generator
+from .renderer import Renderer
+
 
 def list_projects(config):
     print("Available generators:")
     rows = []
     for gen, props in config.items():
-        rows.append([gen, props.get('root_dir', ''), props.get('description', '')])
+        rows.append([gen, props.get('root_dir', ''),
+                     props.get('description', '')])
 
     string = termtables.to_string(
         rows,
-        header=['Project' , 'Root folder', 'Description'],
+        header=['Project', 'Root folder', 'Description'],
         style=termtables.styles.ascii_thin_double,
         padding=(0, 1),
         alignment="lcc")
     print(string)
     exit(0)
-    
+
 
 def get_parser():
     parser = argparse.ArgumentParser(
@@ -101,7 +103,6 @@ def main():
     renderer = Renderer()
     gen = Generator(config[generator], reader, renderer, data_dir=data_dir)
     gen.generate(args.direcotry)
-
 
 
 if __name__ == '__main__':

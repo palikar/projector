@@ -1,7 +1,8 @@
 import os
 import abc
 
-import utils
+from . import utils
+
 
 class BaseProcessor:
 
@@ -27,12 +28,12 @@ class BaseProcessor:
 class License(BaseProcessor):
 
     license_files = {
-        'bsd2' : 'LICENSE_BSD2.txt',
-        'bsd3' : 'LICENSE_BSD3.txt',
-        'gpl2' : 'LICENSE_GPL2.txt',
-        'gpl3' : 'LICENSE_GPL3.txt',
-        'mit'  : 'LICENSE_MIT.txt' ,
-        'apache2'  : 'LICENSE_APACHE2'
+        'bsd2': 'LICENSE_BSD2.txt',
+        'bsd3': 'LICENSE_BSD3.txt',
+        'gpl2': 'LICENSE_GPL2.txt',
+        'gpl3': 'LICENSE_GPL3.txt',
+        'mit': 'LICENSE_MIT.txt',
+        'apache2': 'LICENSE_APACHE2'
     }
 
     def __init__(self):
@@ -50,7 +51,6 @@ class License(BaseProcessor):
 
         lic = value.lower()
         license_file = os.path.join(self.data_dir, self.license_files[lic])
-        
         project_license_file = os.path.join(project_directory, 'LICENSE.txt')
 
         utils.copyfile(license_file, project_license_file)

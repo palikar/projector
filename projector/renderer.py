@@ -2,7 +2,7 @@ import re
 import os
 import pystache
 
-import utils
+from . import utils
 
 
 class Renderer:

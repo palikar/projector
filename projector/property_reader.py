@@ -6,11 +6,14 @@ readline.parse_and_bind('tab: complete')
 readline.parse_and_bind('set editing-mode emacs')
 
 
-class OptionsCompleter(object):
+class OptionsCompleter():
 
     def __init__(self, options):
         self.options = sorted(options)
-        return
+        self.matches = []
+
+    def get_matches(self):
+        return self.matches
 
     def complete(self, text, state):
         response = None
@@ -47,6 +50,7 @@ class PropertyReader:
             print("Inconsisten property: " + prop["name"])
             sys.exit(1)
 
+    @staticmethod
     def _process_binary(prop, default):
         value = None
         while value is None:
@@ -59,8 +63,10 @@ class PropertyReader:
             if value.lower() not in ("y", "n", "yes", "no"):
                 value = None
                 print("Please type \'y\' or \'n\' ")
-        return value == "y" or value == "yes"
 
+        return value in ("y", "yes")
+
+    @staticmethod
     def _process_choices(prop, default, choices):
         readline.set_completer(
             OptionsCompleter(choices).complete)
@@ -82,6 +88,7 @@ class PropertyReader:
         readline.set_completer(None)
         return value
 
+    @staticmethod
     def _process_text(prop, default):
         value = None
         while value is None:
@@ -94,7 +101,6 @@ class PropertyReader:
                 if value.strip() == "":
                     continue
         return value
-
 
     @staticmethod
     def _process_prop(prop):
